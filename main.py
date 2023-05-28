@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import os
 import pathlib
 import subprocess
 import sys
@@ -72,7 +73,7 @@ def global_theme_set(profile: str):
 
 
 def nvim_config_reload():
-    for nvim_instance in pathlib.Path("/tmp").glob("nvim*/0"):
+    for nvim_instance in pathlib.Path(os.getenv("XDG_RUNTIME_DIR")).glob("nvim*"):
         nvim = pynvim.attach('socket', path=nvim_instance)
         nvim.command('source $MYVIMRC')
 
